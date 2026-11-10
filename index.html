@@ -44,7 +44,7 @@
     .login-logo-wrap .app-real-logo { max-height: 84px; max-width: 380px; }
     .nav-logo-wrap .app-real-logo { max-height: 48px; max-width: 270px; }
 
-    /* ক্লিন মেনুবার: বামে শুধুই লোগো, ডানে শুধুই লগআউট বাটন */
+    /* ক্লিন মেনুবার: বামে শুধুই লোগো, ডানে শুধুই লগআউট বাটন (মাঝখানে কোনো টেক্সট নেই) */
     .topbar {
       min-height: 76px; background: #FFF; border-bottom: 3px solid var(--gold);
       display: flex; align-items: center; justify-content: space-between;
@@ -172,7 +172,6 @@
     }
     @keyframes its-spin { to { transform: rotate(360deg); } }
 
-    /* Member Selection Checklist in Modal */
     .member-select-box {
       border: 1.5px solid #CCD8E8; border-radius: 12px; max-height: 200px;
       overflow-y: auto; padding: 10px 14px; background: #FFF; margin-top: 6px;
@@ -267,7 +266,7 @@
     // =========================================================================
     // 🌐 আপনার লাইভ Apps Script Web App URL
     // =========================================================================
-    const APPS_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbw6fHef29zJUupGs8iFaWDSadSbPM0-9krolRkyJl_RitubTNc0o7nP4pl2uiUFmFvFnw/exec";
+    const APPS_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbzIdn2fqJQDgjlpIzZgN4Kv28nRAeJN9uDA5Xh2_lUqJUaITm-2q03UmZCEqvtDYxFXWQ/exec";
 
     let SESSION_TOKEN = '';
     let CURRENT_ROLE = '';
@@ -289,7 +288,7 @@
       return '<img class="avatar-photo" src="' + esc(url) + '" alt="Photo" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<div class=\\\'avatar-fallback\\\'>' + fallback + '</div>\'">';
     }
 
-    // Universal Runner
+    // Universal Runner (Supports both Google Apps Script and GitHub Pages)
     async function callServer(action, ...args) {
       showGlobalLoader();
       if (window.google && google.script && google.script.run) {
@@ -401,7 +400,7 @@
           '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '">' +
             '<div>' +
               '<b style="font-size:16px;' + (dues.monthly.isPaid ? 'color:var(--green);' : 'color:var(--red);') + '">' +
-                (dues.monthly.isPaid ? '✓ সকল মাসিক পেমেন্ট পরিশোধিত' : '🔴 মাসিক পেমেন্ট ডিউ') +
+                (dues.monthly.isPaid ? '✓ সকল মাসিক পেমেন্ট পরিশোধিত' : '🔴 বকেয়া মাসিক পেমেন্ট ডিউ') +
               '</b>' +
               '<div style="font-size:24px;font-weight:800;margin:6px 0;">' +
                 (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) +
@@ -414,11 +413,11 @@
             (!dues.monthly.isPaid ? '<button class="btn danger" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'MONTHLY\', ' + dues.monthly.amount + ')">এখনই পরিশোধ করুন</button>' : '') +
           '</div>' +
 
-          '<!-- ২. অতিরিক্ত জমার ডিউ (পরিশোধ না করা পর্যন্ত ডেডলাইন পার হলেও আজীবন থাকবে, পরিশোধ হলে চলে যাবে) -->' +
+          '<!-- ২. অতিরিক্ত জমার ডিউ (পরিশোধ না করা পর্যন্ত থাকবে, পরিশোধ হলে চলে যাবে) -->' +
           (dues.extra ? 
             '<div class="due-card extra">' +
               '<div>' +
-                '<b style="font-size:16px;color:var(--gold-dark);">🟠 সাধারণ জমার ডিউ</b>' +
+                '<b style="font-size:16px;color:var(--gold-dark);">🟠 অতিরিক্ত জমার ডিউ</b>' +
                 '<div style="font-size:24px;font-weight:800;margin:6px 0;color:var(--gold-dark);">' + money(dues.extra.amount) + '</div>' +
                 '<div style="font-size:13px;color:var(--ink);"><b>' + esc(dues.extra.title) + '</b></div>' +
                 '<div style="font-size:12px;color:var(--red);margin-top:4px;">পরিশোধের শেষ তারিখ: <b>' + esc(dues.extra.deadline) + '</b></div>' +
