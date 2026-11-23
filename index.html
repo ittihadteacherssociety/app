@@ -325,9 +325,9 @@
       .member-panel{padding:13px;border-radius:14px}.member-chart{height:150px;gap:6px}
       .member-recent-row{grid-template-columns:minmax(0,1fr) auto;gap:6px}.member-recent-row .member-recent-date{grid-column:1}
     }
-/* FIX: Monthly Due Card Full Width on Mobile */
+/* Mobile: Monthly Payment Card Full Width */
 @media screen and (max-width: 520px) {
-    .member-due-grid .due-card.monthly {
+    .member-due-grid > .due-card:first-child {
         grid-column: 1 / -1 !important;
         width: 100% !important;
         box-sizing: border-box !important;
