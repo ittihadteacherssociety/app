@@ -317,18 +317,22 @@
       .member-kpi-grid{gap:8px;margin:10px 0 14px}.member-kpi{min-height:100px;padding:11px;border-radius:13px}
       .member-kpi-top{font-size:10px;gap:6px}.member-kpi-icon{width:27px;height:27px;font-size:14px;border-radius:8px}
       .member-kpi-value{font-size:17px}.member-due-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-      .member-due-grid .due-card{padding:11px;min-height:136px}
-      /* Mobile: Monthly due card full width */
-.member-due-grid .due-card.monthly{
-    grid-column: 1 / -1;
-}
+      .member-due-grid .due-card{padding:11px;min-height:136px} 
+      
       .member-due-grid .due-card b{font-size:12px!important}
       .member-due-grid .due-card>div>div:nth-child(2){font-size:18px!important}
       .member-due-grid .btn{font-size:11px!important;padding:7px 9px!important}
       .member-panel{padding:13px;border-radius:14px}.member-chart{height:150px;gap:6px}
       .member-recent-row{grid-template-columns:minmax(0,1fr) auto;gap:6px}.member-recent-row .member-recent-date{grid-column:1}
     }
-
+/* FIX: Monthly Due Card Full Width on Mobile */
+@media screen and (max-width: 520px) {
+    .member-due-grid .due-card.monthly {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
   </style>
 </head>
 <body>
@@ -638,7 +642,7 @@
         ).join('') || '<div class="member-empty">কোনো পেমেন্ট রেকর্ড পাওয়া যায়নি</div>';
 
         target.innerHTML =
-          '<div class="member-profile-hero">' + memberPhotoHtml(p.Photo_URL, p.Full_Name) + '<div class="member-profile-copy"><h4>আসসালামু আলাইকুম</h4><p style="font-size:16px;font-weight:800;color:var(--ink);">' + esc(p.Full_Name) + '</p><p>আপনার সদস্য অ্যাকাউন্টের সারসংক্ষেপ</p></div><span class="member-profile-id">ID: ' + esc(p.Member_ID) + '</span></div>' +
+          '<div class="member-profile-hero">' + memberPhotoHtml(p.Photo_URL, p.Full_Name) + '<div class="member-profile-copy"><h2>আসসালামু আলাইকুম</h2><p style="font-size:15px;font-weight:800;color:var(--ink);">' + esc(p.Full_Name) + '</p><p>আপনার সদস্য অ্যাকাউন্টের সারসংক্ষেপ</p></div><span class="member-profile-id">ID: ' + esc(p.Member_ID) + '</span></div>' +
           '<div class="member-kpi-grid">' +
             '<div class="member-kpi due"><div class="member-kpi-top"><span class="member-kpi-icon">📅</span>বকেয়া মাসিক পেমেন্ট</div><div class="member-kpi-value">' + (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) + '</div><div class="member-kpi-top">' + (dues.monthly.isPaid ? 'সব মাসিক পেমেন্ট পরিশোধিত' : (dues.monthly.monthsCount || 1) + ' মাস বকেয়া') + '</div></div>' +
             '<div class="member-kpi own"><div class="member-kpi-top"><span class="member-kpi-icon">💳</span>আপনার অনুমোদিত জমা</div><div class="member-kpi-value">' + money(r.ownTotal || 0) + '</div><div class="member-kpi-top">আপনার নামে মোট অনুমোদিত</div></div>' +
