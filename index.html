@@ -642,7 +642,21 @@
         ).join('') || '<div class="member-empty">কোনো পেমেন্ট রেকর্ড পাওয়া যায়নি</div>';
 
         target.innerHTML =
-          '<div class="member-profile-hero">' + memberPhotoHtml(p.Photo_URL, p.Full_Name) + '<div class="member-profile-copy"><h2>আসসালামু আলাইকুম</h2><p style="font-size:15px;font-weight:800;color:var(--ink);">' + esc(p.Full_Name) + '</p><p>আপনার সদস্য অ্যাকাউন্টের সারসংক্ষেপ</p></div><span class="member-profile-id">ID: ' + esc(p.Member_ID) + '</span></div>' +
+          '<div class="member-profile-hero">' +
+  '<div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;">' +
+    memberPhotoHtml(p.Photo_URL, p.Full_Name) +
+    (!hasPhoto ?
+      '<button class="btn primary" style="font-size:11px;padding:6px 10px;" onclick="uploadOwnPhoto()">📷 ছবি আপলোড করুন</button>' +
+      '<div style="font-size:10px;color:var(--muted);text-align:center;">ছবি শুধু একবার আপলোড করা যাবে</div>'
+      : '') +
+  '</div>' +
+  '<div class="member-profile-copy">' +
+    '<h2>আসসালামু আলাইকুম</h2>' +
+    '<p style="font-size:15px;font-weight:800;color:var(--ink);">' + esc(p.Full_Name) + '</p>' +
+    '<p>আপনার সদস্য অ্যাকাউন্টের সারসংক্ষেপ</p>' +
+  '</div>' +
+  '<span class="member-profile-id">ID: ' + esc(p.Member_ID) + '</span>' +
+'</div>' +
           '<div class="member-kpi-grid">' +
             '<div class="member-kpi due"><div class="member-kpi-top"><span class="member-kpi-icon">📅</span>বকেয়া মাসিক পেমেন্ট</div><div class="member-kpi-value">' + (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) + '</div><div class="member-kpi-top">' + (dues.monthly.isPaid ? 'সব মাসিক পেমেন্ট পরিশোধিত' : (dues.monthly.monthsCount || 1) + ' মাস বকেয়া') + '</div></div>' +
             '<div class="member-kpi own"><div class="member-kpi-top"><span class="member-kpi-icon">💳</span>আপনার অনুমোদিত জমা</div><div class="member-kpi-value">' + money(r.ownTotal || 0) + '</div><div class="member-kpi-top">আপনার নামে মোট অনুমোদিত</div></div>' +
